@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Pedidos.Dominio.Interfaces.Repositorios;
+using Pedidos.Dominio.Mapper;
 using Pedidos.Infra.Contextos;
+using Pedidos.Infra.Repositorios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,13 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PedidosContexto>((options) =>
 {
     options
-        .UseSqlServer(builder.Configuration["ConnectionStrings:PedidosProdutosDB"]);
+        .UseSqlServer(builder.Configuration["ConnectionStrings:PedidosDB"]);
 });
 
+builder.Services.AddScoped<IPedidoRepositorio, PedidosRepositorio>();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

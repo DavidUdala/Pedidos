@@ -5,7 +5,7 @@ using Pedidos.Dominio.Entidades;
 
 namespace Pedidos.Dominio.Mapper
 {
-    internal class MappingProfile : Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
